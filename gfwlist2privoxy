@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo -n 'proxy(socks5): '
+read proxy
+
+tee gfw.action << EOF
+{+forward-override{forward-socks5 $proxy .}}
+EOF
+
+curl -sL https://raw.github.com/gfwlist/gfwlist/master/gfwlist.txt | base64 -d > gfwlist.txt
+
+cat gfwlist.txt | \
+egrep -v '^!|^$|^@@|^\[' | \
+sed -r 's@^\|\|([^\|].*)@\1@g' | \
+sed -r 's@^\|\w+://(.*)@\1@g' \
+> gfwlist_clean
+
+cat gfwlist_clean | egrep '^\/' > gfwlist_regexp
+
+cat gfwlist_clean | egrep '^[^\/]+\/.*(\*|\?).*' > gfwlist_uri_glob
+
+cat gfwlist_clean | egrep -v -e '^\/' -e '^[^\/]+\/.*(\*|\?).*' > gfwlist_normal
+
+cat gfwlist_uri_glob | sed -r 's@\*@\.\*@g;s@\?@\.@g' >> gfw.action
+
+cat gfwlist_normal >> gfw.action
+
+echo -e '.blogspot.\n.google.\ntwimg.edgesuite.net//?appledaily' >> gfw.action
+
+# echo -e '\n============================================================\n'
+# echo -e 'Add the following output address to gfw.action please.\nIt need to convert to privoxy format, see privoxy document: https://www.privoxy.org/user-manual/actions-file.html#AF-PATTERNS\n'
+# echo -e "file: `pwd`/gfwlist_regexp\n"
+# cat gfwlist_regexp
+
+rm -fr gfwlist.txt gfwlist_clean gfwlist_regexp gfwlist_normal gfwlist_uri_glob
+
+echo -e '\n=================================================================\n'
+echo -e \"cp -af `pwd`/gfw.action /etc/privoxy/\"
+echo ''
