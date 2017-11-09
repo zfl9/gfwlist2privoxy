@@ -1,4 +1,4 @@
-## gfw.action 配合 ss-local 使用，达到 Windows|Mac|Android|IOS 使用PAC模式的效果
+## gfw.action 配合 ss-local 使用，达到 gfwlist PAC 效果
 - 在线获取gfwlist.txt, 转换为privoxy可用的格式
 
 ## 用法
@@ -10,7 +10,7 @@
 - 运行shadowsocks ss-local
 - 设置shell proxy环境变量
 - `export http_proxy=http://127.0.0.1:8118 https_proxy=http://127.0.0.1:8118`
-- 这里这提供了经脚本转换的 gfw.action 成品，可直接使用
+- 这里也提供了经脚本转换的 gfw.action 成品，可直接使用
 
 ## 测试
 - 访问大陆网站，`curl -sL www.baidu.com`，走直连，使用 tcpdump 抓包可验证
