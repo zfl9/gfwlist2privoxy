@@ -23,7 +23,7 @@
 - 协议符：`||`位于模式开头，用于匹配`http://*.`、`https://*.`协议字符串及子域名部分；
 - 分隔符：`^`url 分隔符，如`http://192.168.1.1:8080/?a=1&b=2`的`//`、`:`、`/`、`?`、`=`、`&`及末尾；
 - 正则符：`/regex/`使用 Unix 路径分隔符包住正则表达式（Perl 正则）即可（避免大量正则的使用，性能低）；
-- 例外符：`@@`开头的模式，表示定义一个例外规则，如`@@||google.com^`、`@@/https?:\/\/.*\.google\..*`；
+- 例外符：`@@`开头的模式，表示定义一个例外规则，如`@@||google.com^`、`@@/https?:\/\/.*\.google\..*/`；
 - 注释符：`!`开头的行均为注释行，会被 adblockplus 忽略，当然还有特殊注释，此处略过。
 
 ## privoxy.action 规则
@@ -45,7 +45,7 @@ host 模式例子：
 - `.google.`，匹配所有包含 .google. 内容的域名下的所有请求（包括 google）；
 
 典型的 privoxy.action：
-```privoxy
+``` bash
 ### 定义别名，可包含除空格、TAB、=、{} 外的任意字符
 {{alias}}
 # 代理(socks5)
@@ -67,5 +67,5 @@ direct = +forward-override{forward .}
 更多 privoxy 用法请参考：[privoxy - 用户手册](https://www.privoxy.org/user-manual/)；
 
 ## 关于
-- 2017-11-27 19:48:03 CST
+- 2017-11-28 11:54:03 CST
 - Otokaze（j1002238565@gmail.com）
