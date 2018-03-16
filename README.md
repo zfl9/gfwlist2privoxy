@@ -1,7 +1,13 @@
-## 适用于 privoxy 的 gfwlist.pac（socks5 代理）
+# 适用于 privoxy 的 gfwlist.pac（socks5 代理）
+
 > 在线获取 gfwlist.txt 并将其转换为 privoxy.action，以达 gfwlist.pac 效果
 
+## macOS 版本
+
+- 由于 macOS 的命令行参数与 Linux 命令行参数部分不一致，macOS 用户请使用 `gfwlist2privoxy-mac-zsh` 代替 `gfwlist2privoxy`。使用 `zsh` 能得到更好的提示效果。
+
 ## 用法
+
 - 启动你的 socks5 代理（或确保它现在为可用状态），我自己使用的是 [ss-local](https://www.zfl9.com/ss-local.html)，监听在 1080 端口；
 - `curl -skL https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy -o gfwlist2privoxy`
 - `bash gfwlist2privoxy '127.0.0.1:1080'`，请注意将 "127.0.0.1:1080" 替换为你的 socks5 代理地址；
@@ -13,11 +19,13 @@
 - 当然，如果你不想自己转换，也可以直接使用提供的 gfwlist.action 成品，它也是使用脚本转换的。
 
 ## 测试
+
 - 访问未墙网站：`curl -skL www.baidu.com`，走直连，使用 tcpdump 抓包可验证；
 - 访问被墙网站：`curl -skL www.google.com`，走代理，实现了 gfwlist PAC 效果；
 - 查看当前 IP：`curl -skL ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP；
 
 ## adblockplus 规则
+
 - 通配符：`*`任意长度字符，并且默认假设在字符串两边存在`*`，即`ad`与`*ad*`是一样的；
 - 边界符：`|`位于模式边界，用于取消默认的边界`*`通配符，如`|https://www.google.com/`；
 - 协议符：`||`位于模式开头，用于匹配`http://*.`、`https://*.`协议字符串及子域名部分；
@@ -27,6 +35,7 @@
 - 注释符：`!`开头的行均为注释行，会被 adblockplus 忽略，当然还有特殊注释，此处略过。
 
 ## privoxy.action 规则
+
 - scheme 部分：因为 privoxy 已经默认假设存在`http://`、`https://`，因此不能再定义协议字符串；
 - host 部分：使用 globbing 模式，即`*`任意长度字符、`?`任意单个字符、`[set]`集合、`[^set]`集合（取反）；
 - host 部分是可以指定端口号的，和平时指定端口号一样，比如：`www.zfl9.com:8989`、`192.168.1.1:8080`；
@@ -34,6 +43,7 @@
 - uri 部分：使用 regex 模式（扩展正则，POSIX 1003.2），因此不支持非贪婪匹配等 Perl 正则特性。
 
 host 模式例子：
+
 - `/`，匹配所有 URL 请求，这是一个特殊的模式；
 - `:8080`，匹配所有目的端口为 8080 的请求；
 - `192.168.1.1`，匹配目的主机 192.168.1.1 的所有请求；
@@ -45,6 +55,7 @@ host 模式例子：
 - `.google.`，匹配所有包含 .google. 内容的域名下的所有请求（包括 google）；
 
 典型的 privoxy.action：
+
 ``` bash
 ### 定义别名，可包含除空格、TAB、=、{} 外的任意字符
 {{alias}}
@@ -67,5 +78,6 @@ direct = +forward-override{forward .}
 更多 privoxy 用法请参考：[privoxy - 用户手册](https://www.privoxy.org/user-manual/)；
 
 ## 关于
+
 - 2018-01-27 09:18:34 CST
 - Otokaze（zfl9.com@gmail.com）
