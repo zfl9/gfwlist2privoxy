@@ -10,7 +10,7 @@
 
 - 启动你的 socks5 代理（或确保它现在为可用状态），我自己使用的是 [ss-local](https://www.zfl9.com/ss-local.html)，监听在 1080 端口；
 - `curl -skL https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy -o gfwlist2privoxy`
-- `bash gfwlist2privoxy '127.0.0.1:1080'`，请注意将 "127.0.0.1:1080" 替换为你的 socks5 代理地址；
+- `sh gfwlist2privoxy '127.0.0.1:1080'`，请注意将 "127.0.0.1:1080" 替换为你的 socks5 代理地址；
 - `cp -af gfwlist.action /etc/privoxy/`，将 gfwlist.action 拷贝到 privoxy 目录；
 - `echo 'actionsfile gfwlist.action' >> /etc/privoxy/config`，启用 gfwlist.action 动作文件；
 - `systemctl restart privoxy.service`，重启 privoxy 服务；
@@ -20,9 +20,9 @@
 
 ## 测试
 
-- 访问未墙网站：`curl -skL www.baidu.com`，走直连，使用 tcpdump 抓包可验证；
-- 访问被墙网站：`curl -skL www.google.com`，走代理，实现了 gfwlist PAC 效果；
-- 查看当前 IP：`curl -skL ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP；
+- 访问未墙网站：`curl -4sSkL www.baidu.com`，走直连，使用 tcpdump 抓包可验证；
+- 访问被墙网站：`curl -4sSkL www.google.com`，走代理，实现了 gfwlist PAC 效果；
+- 查看当前 IP：`curl -4sSkL ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP；
 
 ## adblockplus 规则
 
@@ -76,8 +76,3 @@ direct = +forward-override{forward .}
 ```
 
 更多 privoxy 用法请参考：[privoxy - 用户手册](https://www.privoxy.org/user-manual/)；
-
-## 关于
-
-- 2018-01-27 09:18:34 CST
-- Otokaze（zfl9.com@gmail.com）
