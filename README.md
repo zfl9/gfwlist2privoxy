@@ -53,16 +53,16 @@ host 部分的例子：
 - `.google.`，匹配所有包含 .google. 内容的域名下的所有请求（包括 google）
 - `.google.com`，匹配所有以 .google.com 结尾的域名下的所有请求（包括 google.com）
 
-典型的 privoxy.action：
+privoxy.action 典型用法：
 ``` bash
-### 定义别名，可包含除空格、TAB、=、{} 外的任意字符
+# 定义别名，可包含除空格、Tab、=、{} 外的任意字符
 {{alias}}
 # 代理(socks5)
 socks5 = +forward-override{forward-socks5 127.0.0.1:1080 .}
 # 直连
 direct = +forward-override{forward .}
 
-### 位于后面的规则优先于前面的规则，因此例外规则必须写在后面，否则无法生效
+# 后面的规则会覆盖前面的规则，因此例外规则必须写在后面
 # 所有网站走代理 (一般情况写在前面)
 {socks5}
 /
@@ -73,4 +73,4 @@ direct = +forward-override{forward .}
 .chinaz.com
 ```
 
-更多 privoxy 用法请参考：[privoxy - 用户手册](https://www.privoxy.org/user-manual/)；
+更多 privoxy 用法请参考：[privoxy - 用户手册](https://www.privoxy.org/user-manual/)
