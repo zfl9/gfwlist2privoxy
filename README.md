@@ -34,7 +34,7 @@
 - 注释符：`!`开头的行均为注释行，会被 adblockplus 忽略，当然还有特殊注释，此处略过。
 
 // TEST
-<span style="color:red">红色文本</span>
+<span color="red">红色文本</span>
 
 ## privoxy.action 规则
 - scheme 部分：因为 privoxy 已经默认假设存在`http://`、`https://`，因此不能再定义协议字符串；
