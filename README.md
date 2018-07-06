@@ -7,27 +7,26 @@
 - curl (https)
 - Perl5 v5.10.0+
 
-// TODO
-
-## 用法
-
-- 启动你的 socks5 代理（或确保它现在为可用状态），我自己使用的是 [ss-local](https://www.zfl9.com/ss-local.html)，监听在 1080 端口；
-- `curl -skL https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy -o gfwlist2privoxy`
-- `sh gfwlist2privoxy '127.0.0.1:1080'`，请注意将 "127.0.0.1:1080" 替换为你的 socks5 代理地址；
-- `cp -af gfwlist.action /etc/privoxy/`，将 gfwlist.action 拷贝到 privoxy 目录；
-- `echo 'actionsfile gfwlist.action' >> /etc/privoxy/config`，启用 gfwlist.action 动作文件；
-- `systemctl restart privoxy.service`，重启 privoxy 服务；
-- `systemctl -l status privoxy.service`，检查 privoxy 运行状态；
+## 脚本用法
+- 运行 socks5 代理，比如 [ss-local](https://www.zfl9.com/ss-local.html)，监听端口随意（如 1080）
+- `curl -4sSkL https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy -O`
+- `sh gfwlist2privoxy 127.0.0.1:1080`，请注意将 `127.0.0.1:1080` 替换为你的 socks5 代理地址
+- `cp -af gfwlist.action /etc/privoxy/`，将 gfwlist.action 拷贝到 privoxy 配置目录
+- `echo 'actionsfile gfwlist.action' >>/etc/privoxy/config`，应用 gfwlist.action 配置
+- `systemctl restart privoxy.service`，重启 privoxy 服务
+- `systemctl -l status privoxy.service`，检查 privoxy 运行状态
+- 在当前 shell 中执行下面的命令，设置环境变量（建议添加到 bashrc、zshrc 等文件中，方便使用）
 - `proxy=http://127.0.0.1:8118; export http_proxy=$proxy https_proxy=$proxy no_proxy="localhost, 127.0.0.1, ::1"`
-- 当然，如果你不想自己转换，也可以直接使用提供的 gfwlist.action 成品，它也是使用脚本转换的。
+- 如果你没有运行 gfwlist2privoxy 脚本的条件，也可以从 [http://main.zfl9.com/gfwlist.action] 下载（6 小时更新一次）
 
-## 测试
-
-- 访问未墙网站：`curl -4sSkL www.baidu.com`，走直连，使用 tcpdump 抓包可验证；
-- 访问被墙网站：`curl -4sSkL www.google.com`，走代理，实现了 gfwlist PAC 效果；
-- 查看当前 IP：`curl -4sSkL ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP；
+## 代理测试
+- 访问墙内网站：`curl -4sSkL https://www.baidu.com`，走直连，使用 tcpdump 抓包可验证
+- 访问墙外网站：`curl -4sSkL https://www.google.com`，走代理，实现了 gfwlist PAC 效果
+- 查看当前 IP：`curl -4sSkL http://ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP
 
 ## adblockplus 规则
+
+// TODO
 
 - 通配符：`*`任意长度字符，并且默认假设在字符串两边存在`*`，即`ad`与`*ad*`是一样的；
 - 边界符：`|`位于模式边界，用于取消默认的边界`*`通配符，如`|https://www.google.com/`；
@@ -38,7 +37,6 @@
 - 注释符：`!`开头的行均为注释行，会被 adblockplus 忽略，当然还有特殊注释，此处略过。
 
 ## privoxy.action 规则
-
 - scheme 部分：因为 privoxy 已经默认假设存在`http://`、`https://`，因此不能再定义协议字符串；
 - host 部分：使用 globbing 模式，即`*`任意长度字符、`?`任意单个字符、`[set]`集合、`[^set]`集合（取反）；
 - host 部分是可以指定端口号的，和平时指定端口号一样，比如：`www.zfl9.com:8989`、`192.168.1.1:8080`；
