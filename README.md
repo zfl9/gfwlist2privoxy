@@ -20,7 +20,7 @@
 - 如果你没有运行 gfwlist2privoxy 脚本的条件，也可以从 http://main.zfl9.com/gfwlist.action 下载（6 小时更新一次）
 
 ## 代理测试
-- 访问墙内网站：`curl -4sSkL https://www.baidu.com`，走直连，使用 tcpdump 抓包可验证
+- 访问墙内网站：`curl -4sSkL https://www.baidu.com`，走直连，tcpdump 抓包可验证
 - 访问墙外网站：`curl -4sSkL https://www.google.com`，走代理，实现了 gfwlist PAC 效果
 - 查看当前 IP：`curl -4sSkL http://ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP
 
