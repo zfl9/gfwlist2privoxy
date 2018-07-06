@@ -36,11 +36,11 @@
 ![Adblock Plus 中的 `^` 模式字符](http://main.zfl9.com/images/abp-url-split-rule.png)
 
 ## privoxy.action 规则
-- scheme 部分：因为 privoxy 已经默认假设存在`http://`、`https://`，因此不能再定义协议字符串；
-- host 部分：使用 globbing 模式，即`*`任意长度字符、`?`任意单个字符、`[set]`集合、`[^set]`集合（取反）；
-- host 部分是可以指定端口号的，和平时指定端口号一样，比如：`www.zfl9.com:8989`、`192.168.1.1:8080`；
-- host 部分~~若为 IP 地址，则不能使用通配符~~，通配符适用于 IP 地址；如果为 IPv6 地址，需用`<>`括起来；
-- uri 部分：使用 regex 模式（扩展正则，POSIX 1003.2），因此不支持非贪婪匹配等 Perl 正则特性。
+- 协议部分：privoxy 已经默认假设存在`http://`、`https://`，因此不能再定义协议字符串
+- host 部分：使用 glob 模式，即`*`任意长度字符、`?`任意单个字符、`[set]`集合、`[^set]`集合（取反）
+- host 部分可以指定端口号，语法和平时指定端口号一样，比如：`www.zfl9.com:8989`、`192.168.1.1:8080`
+- host 部分除了可以是域名外，还可以是 IPv4、IPv6 地址，如果为 IPv6 地址，需用`<>`括起来（取消歧义）
+- uri 部分：使用 regex 模式（POSIX 扩展正则表达式，ERE，POSIX 1003.2），不支持非贪婪匹配等高级特性
 
 host 模式例子：
 
