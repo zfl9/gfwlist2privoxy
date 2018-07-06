@@ -15,7 +15,7 @@
 - `echo 'actionsfile gfwlist.action' >>/etc/privoxy/config`，应用 gfwlist.action 配置
 - `systemctl restart privoxy.service`，重启 privoxy 服务
 - `systemctl -l status privoxy.service`，检查 privoxy 运行状态
-- 执行以下命令，设置环境变量（建议添加到 bashrc、zshrc 等文件中，方便使用），注意将 8118 替换为 privoxy 的端口号
+- 设置环境变量（建议添加到 bashrc、zshrc 等文件中，方便使用），注意将 8118（默认）替换为 privoxy 的端口号
 - `proxy=http://127.0.0.1:8118; export http_proxy=$proxy https_proxy=$proxy no_proxy="localhost, 127.0.0.1, ::1"`
 - 如果你没有运行 gfwlist2privoxy 脚本的条件，也可以从 [http://main.zfl9.com/gfwlist.action] 下载（6 小时更新一次）
 
