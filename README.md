@@ -1,10 +1,13 @@
 # 适用于 privoxy 的 gfwlist.pac（socks5 代理）
+由于 macOS 的命令行参数与 Linux 命令行参数部分不一致，macOS 用户请使用 `gfwlist2privoxy-mac-zsh` 代替 `gfwlist2privoxy`。使用 `zsh` 能得到更好的提示效果。 -- by [c-rainstorm](https://github.com/c-rainstorm)
+[zfl9](https://github.com/zfl9) 注：现使用 Perl5 替代 sed、grep 等正则处理工具，应该不存在所谓的参数不一致问题了，请先尝试 `gfwlist2privoxy`。
 
-> 在线获取 gfwlist.txt 并将其转换为 privoxy.action，以达 gfwlist.pac 效果
+## 脚本依赖
+- base64
+- curl (https)
+- Perl5 v5.10.0+
 
-## macOS 版本
-
-- 由于 macOS 的命令行参数与 Linux 命令行参数部分不一致，macOS 用户请使用 `gfwlist2privoxy-mac-zsh` 代替 `gfwlist2privoxy`。使用 `zsh` 能得到更好的提示效果。
+// TODO
 
 ## 用法
 
