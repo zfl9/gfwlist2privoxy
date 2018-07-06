@@ -17,7 +17,7 @@
 - `systemctl -l status privoxy.service`，检查 privoxy 运行状态
 - 设置环境变量（建议添加到 bashrc、zshrc 等文件中，方便使用），注意将 8118（默认）替换为 privoxy 的端口号
 - `proxy=http://127.0.0.1:8118; export http_proxy=$proxy https_proxy=$proxy no_proxy="localhost, 127.0.0.1, ::1"`
-- 如果你没有运行 gfwlist2privoxy 脚本的条件，也可以从 [zfl9.github.io >> gfwlist.action](https://zfl9.github.io/gfwlist2privoxy/gfwlist.action) 下载（6 小时更新一次）
+- 如果你没有运行 gfwlist2privoxy 脚本的条件，也可以从 <a href="https://zfl9.github.io/gfwlist2privoxy/gfwlist.action" download>zfl9.github.io >> gfwlist.action</a> 下载（每 6 个小时更新一次）
 
 ## 代理测试
 - 访问墙内网站：`curl -4sSkL https://www.baidu.com`，走直连，tcpdump 抓包可验证
