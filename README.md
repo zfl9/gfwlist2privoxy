@@ -53,7 +53,7 @@ host 部分的例子：
 - `.google.`，匹配所有包含 .google. 内容的域名下的所有请求（包括 google）
 - `.google.com`，匹配所有以 .google.com 结尾的域名下的所有请求（包括 google.com）
 
-privoxy.action 典型用法：
+privoxy.action 典型写法：
 ``` bash
 # 定义别名，可包含除空格、Tab、=、{} 外的任意字符
 {{alias}}
