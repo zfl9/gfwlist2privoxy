@@ -14,7 +14,7 @@
 - `mv -f gfwlist.action /etc/privoxy/`，将 gfwlist.action 移动到 privoxy 配置文件目录
 - `echo 'actionsfile gfwlist.action' >>/etc/privoxy/config`，应用 gfwlist.action 配置文件
 - `systemctl restart privoxy.service`，重启 privoxy 服务，留意 privoxy 运行状态，检查是否有错误
-- 如果没有运行 gfwlist2privoxy 的条件，也可从 https://zfl9.github.io/gfwlist2privoxy/gfwlist.action 下载（6 小时更新一次）
+- 如果没有运行条件，也可从 https://zfl9.github.io/gfwlist2privoxy/gfwlist.action 下载（6 小时更新一次）
 
 ## 代理测试
 - 访问墙内网站：`curl -4sSkL https://www.baidu.com`，走直连，tcpdump 抓包可验证
