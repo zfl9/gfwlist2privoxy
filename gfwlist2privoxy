@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 # Desc: convert gfwlist.txt into privoxy.action
-# Usage: sh gfwlist2privoxy <socks5_addr:socks5_port>
+# Usage: bash gfwlist2privoxy <socks5_addr:socks5_port>
 # Dependency: base64, curl(https support), perl5 v5.10.0+
 
 # check dependency

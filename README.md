@@ -8,8 +8,8 @@
 - Perl5 v5.10.0+
 
 ## 脚本用法
-- `curl -4sSkL https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy -O`
-- `sh gfwlist2privoxy 127.0.0.1:1080`，注意将 `127.0.0.1:1080` 替换为你的 socks5 地址
+- `curl -4sSkLO https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy`
+- `bash gfwlist2privoxy 127.0.0.1:1080`，注意将 `127.0.0.1:1080` 替换为你的 socks5 地址
 - `mv -f gfwlist.action /etc/privoxy/`，将 gfwlist.action 移动到 privoxy 配置文件目录
 - `echo 'actionsfile gfwlist.action' >>/etc/privoxy/config`，应用 gfwlist.action 配置文件
 - `systemctl restart privoxy.service`，重启 privoxy 服务，留意 privoxy 运行状态，检查是否有错误
