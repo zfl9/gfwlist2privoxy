@@ -14,21 +14,14 @@
 - `echo 'actionsfile gfwlist.action' >>/etc/privoxy/config`，应用 gfwlist.action 配置文件
 - `systemctl restart privoxy.service`，重启 privoxy 服务，留意 privoxy 运行状态，检查是否有错误
 
-## 代理测试
-- 访问墙内网站：`curl -4sSkL https://www.baidu.com`，走直连，tcpdump 抓包可验证
-- 访问墙外网站：`curl -4sSkL https://www.google.com`，走代理，实现了 gfwlist PAC 效果
-- 查看当前 IP：`curl -4sSkL http://ip.chinaz.com/getip.aspx`，按道理来说，会显示本机 IP
-
 ## Adblock Plus 规则
 - 注释符：`!`开头的行均为注释行，会被 Adblock Plus 忽略，当然还有特殊注释，此处略过
 - 通配符：`*`匹配任意长度字符，并且默认假设字符串两边存在`*`，即`ad`与`*ad*`是一样的
 - 边界符：`|`位于模式首尾，用于取消首尾默认的`*`通配符，比如`|https://www.google.com/ad`
 - 子域符：`||`位于模式头部，用于匹配`http://*.`、`https://*.`协议字符串及子域部分（含当前域名）
-- 分隔符：`^`匹配 url 分隔符，如`http://192.168.1.1:8080/?a=1&b=2`中的红色部分以及地址结尾（见下图）
-- 正则符：`/regex/`使用 Unix 路径分隔符括住正则表达式（Perl 正则）（应避免大量正则的使用，性能较低）
+- 分隔符：`^`匹配 url 分隔符，如`http://192.168.1.1:8080/?a=1&b=2`中的红色部分以及地址结尾（~~见下图~~）
+- 正则符：`/regex/`使用 Unix 路径分隔符括住正则表达式（Perl 正则）（应避免大量正则的使用，性能低）
 - 例外符：`@@`开头的模式，表示定义一个例外规则，如`@@||google.com^`、`@@/https?:\/\/.*\.google\..*/`
-
-![Adblock Plus 中的 `^` 模式字符](http://main.zfl9.com/images/abp-url-split-rule.png)
 
 ## privoxy.action 规则
 - 协议部分：privoxy 已经默认假设存在`http://`、`https://`，因此不能再定义协议字符串
