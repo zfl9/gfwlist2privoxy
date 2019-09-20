@@ -30,12 +30,13 @@ s@^\*\.@.@;
 s@\.?\*$@.@;
 s@(?=[^0-9a-zA-Z.*-]).*+$@@ unless /^\d+\.\d+\.\d+\.\d+(?::\d+)?$/;
 s@^(?!\.|\s*+$|\d+\.\d+\.\d+\.\d+(?::\d+)?$)@.@;
+s@^\.[^.]++$@@;
 s@^\s*+$@@' >${temporary_file}
 echo -e '.google.\n.blogspot.\n.twimg.edgesuite.net' >>${temporary_file}
 
 # conversion completed
 cat ${temporary_file} | perl -ne 'print if /^\d+\.\d+\.\d+\.\d+(?::\d+)?$/' | sort -n | uniq >>${gfwlist_action}
-cat ${temporary_file} | perl -ne 'print unless /^\d+\.\d+\.\d+\.\d+(?::\d+)?$/' | sort | uniq -i >>${gfwlist_action}
+cat ${temporary_file} | perl -ne 'print unless /^\d+\.\d+\.\d+\.\d+(?::\d+)?$/' | sort | uniq >>${gfwlist_action}
 rm -fr ${temporary_file}
 cat << EOF
 Generated file: '${gfwlist_action}'. Please put it in privoxy config directory.
