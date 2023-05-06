@@ -14,6 +14,8 @@
 - `echo 'actionsfile gfwlist.action' >>/etc/privoxy/config`，应用 gfwlist.action 配置文件
 - `systemctl restart privoxy.service`，重启 privoxy 服务，留意 privoxy 运行状态，检查是否有错误
 
+> 更多信息，请参见: https://github.com/zfl9/gfwlist2privoxy/wiki
+
 ## Adblock Plus 规则
 - 注释符：`!`开头的行均为注释行，会被 Adblock Plus 忽略，当然还有特殊注释，此处略过
 - 通配符：`*`匹配任意长度字符，并且默认假设字符串两边存在`*`，即`ad`与`*ad*`是一样的
